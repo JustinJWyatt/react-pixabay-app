@@ -7,6 +7,9 @@ import FormControl from '@material-ui/core/FormControl';
 import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 
+import axios from 'axios';
+import fetchJsonp from 'fetch-jsonp';
+
 const styles = theme => ({
 
     root: {
@@ -32,6 +35,15 @@ class Search extends Component{
     apiKey: '10702282-184312a2ee061f473b271037a',
     images: []
   };
+
+  onTextChange = e => {
+    this.setState({ [e.target.name]: e.target.value }, () => {
+      fetchJsonp(`${this.state.apiURL}/?key=${this.state.apiKey}&q=${this.state.searchText}&image_type=photo&per_page=${this.state.amount}&safesearch=true`)
+           .then(res => res.json().then(data =>  this.setState({images: data.hits})))
+           .catch(err => console.log(err));
+    });
+  }
+
 
   render(){
 
