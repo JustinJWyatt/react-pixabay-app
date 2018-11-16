@@ -6,9 +6,9 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
-
-import axios from 'axios';
 import fetchJsonp from 'fetch-jsonp';
+
+import ImageResults from '../image-results/ImageResults';
 
 class Search extends Component{
 
@@ -29,7 +29,7 @@ class Search extends Component{
   }
 
   onAmountChange = (e, index, value) => {
-    this.setState({ amount: value });
+    this.setState({ amount: e.target.value });
   }
 
   render(){
@@ -55,6 +55,8 @@ class Search extends Component{
             <MenuItem value={50}>50</MenuItem>
             <MenuItem value={60}>60</MenuItem>
           </Select>
+          <br/>
+          { this.state.images.length > 0 ? (<ImageResults images={this.state.images}/>) : null}
         </FormControl>
       </form>
     )
