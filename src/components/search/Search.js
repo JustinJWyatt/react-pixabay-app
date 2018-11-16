@@ -10,27 +10,11 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import fetchJsonp from 'fetch-jsonp';
 
-const styles = theme => ({
-
-    root: {
-      display: 'flex',
-      flexWrap: 'wrap'
-    },
-    formControl: {
-      margin: theme.spacing.unit,
-      minWidth: 120,
-    },
-    selectEmpty: {
-      marginTop: theme.spacing.unity * 2
-    }
-
-});
-
 class Search extends Component{
 
   state = {
     searchText: '',
-    amount: 15,
+    amount: 5,
     apiURL: 'https://pixabay.com/api/',
     apiKey: '10702282-184312a2ee061f473b271037a',
     images: []
@@ -44,25 +28,26 @@ class Search extends Component{
     });
   }
 
+  onAmountChange = (e, index, value) => {
+    this.setState({ amount: value });
+  }
 
   render(){
 
-    const { classes } = this.props;
-
     return (
-      <form className={classes.root}>
+      <form>
         <TextField label="Search For Images"
                    defaultValue={this.state.searchText}
                    onChange={this.onTextChange}
                    fullWidth={true}
+                   className="search-bar"
         />
 
         <br/>
-        <FormControl className={styles.formControl}>
-          <InputLabel>Amount</InputLabel>
+        <FormControl>
           <Select value={this.state.amount}
                   onChange={this.onAmountChange}
-                  className="select">
+                  >
             <MenuItem value={5}>5</MenuItem>
             <MenuItem value={10}>10</MenuItem>
             <MenuItem value={15}>15</MenuItem>
@@ -76,8 +61,4 @@ class Search extends Component{
   }
 }
 
-Search.propTypes = {
-  classes: PropTypes.object.isRequired
-}
-
-export default withStyles(styles)(Search);
+export default Search;
