@@ -6,18 +6,24 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 
+import Search from './components/search/Search';
+
 class App extends Component {
   render() {
     return (
-      <AppBar>
-        <Toolbar>
-          <Typography variant="title" color="inherit">
-            Title
-          </Typography>
-        </Toolbar>
-      </AppBar>
+      <div>
+        <Search/>
+      </div>
     );
   }
 }
 
 export default App;
+
+// <AppBar>
+//   <Toolbar>
+//     <Typography variant="title" color="inherit">
+//       Title
+//     </Typography>
+//   </Toolbar>
+// </AppBar>
