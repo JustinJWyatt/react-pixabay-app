@@ -21,10 +21,20 @@ class Search extends Component{
   };
 
   onTextChange = e => {
-    this.setState({ [e.target.name]: e.target.value }, () => {
-      fetchJsonp(`${this.state.apiURL}/?key=${this.state.apiKey}&q=${this.state.searchText}&image_type=photo&per_page=${this.state.amount}&safesearch=true`)
-           .then(res => res.json().then(data =>  this.setState({images: data.hits})))
-           .catch(err => console.log(err));
+
+    const val = e.target.value;
+
+    this.setState({ [e.target.name]: val }, () => {
+
+      if (val === '') {
+
+        this.setState({ images: [] });
+
+      }else {
+        fetchJsonp(`${this.state.apiURL}/?key=${this.state.apiKey}&q=${this.state.searchText}&image_type=photo&per_page=${this.state.amount}&safesearch=true`)
+             .then(res => res.json().then(data =>  this.setState({images: data.hits})))
+             .catch(err => console.log(err));
+      }
     });
   }
 
